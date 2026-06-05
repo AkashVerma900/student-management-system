@@ -1,4 +1,5 @@
 package com.example.studentManagementSystem.controller;
+import java.util.ArrayList;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,12 +14,15 @@ import com.example.studentManagementSystem.model.Student;
 public class StudentController {
 
     @GetMapping
-    public Student getStudent() {
+    public ArrayList<Student> getStudents() {
 
-        return new Student(
-                1,
-                "Akash",
-                "Computer Science"
+        ArrayList<Student> students = new ArrayList<>();
+        students.add(
+            new Student(1,"Akash Verma","CSE")
         );
+        students.add(
+            new Student(2,"Aryan Verma","CSE")
+        );
+        return students;
     }
 }
