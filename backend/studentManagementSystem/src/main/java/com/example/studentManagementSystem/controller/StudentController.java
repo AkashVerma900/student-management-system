@@ -9,7 +9,7 @@ import com.example.studentManagementSystem.model.Student;
 
 @RestController
 @RequestMapping("/student")
-@CrossOrigin(origins = "https://localhost:5173")
+@CrossOrigin(origins = "http://localhost:5173")
 public class StudentController {
 
     @GetMapping
@@ -18,7 +18,7 @@ public class StudentController {
         return new Student(
                 1,
                 "Akash",
-                "Verma"
+                "Computer Science"
         );
     }
 }
