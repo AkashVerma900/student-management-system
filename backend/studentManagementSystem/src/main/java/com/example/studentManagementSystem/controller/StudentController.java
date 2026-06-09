@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.studentManagementSystem.model.Student;
+import com.example.studentManagementSystem.service.StudentService;
 
 @RestController
 @RequestMapping("/student")
@@ -16,6 +17,9 @@ import com.example.studentManagementSystem.model.Student;
 public class StudentController {
     @Autowired
     JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    private StudentService studentService;
     
     @GetMapping
     public ArrayList<Student> getStudents() {
@@ -29,6 +33,7 @@ public class StudentController {
         );
         return students;
     }
+
      @GetMapping("/count")
     public int countStudents() {
 
@@ -38,6 +43,10 @@ public class StudentController {
                 sql,
                 Integer.class
         );
+    }
+    @GetMapping("/message")
+    public String getMessage() {
+        return studentService.getStudentInfo();
     }
 
 }
