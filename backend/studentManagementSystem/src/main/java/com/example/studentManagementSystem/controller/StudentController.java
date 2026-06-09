@@ -1,6 +1,8 @@
 package com.example.studentManagementSystem.controller;
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +14,9 @@ import com.example.studentManagementSystem.model.Student;
 @RequestMapping("/student")
 @CrossOrigin(origins = "http://localhost:5173")
 public class StudentController {
-
+    @Autowired
+    JdbcTemplate jdbcTemplate;
+    
     @GetMapping
     public ArrayList<Student> getStudents() {
 
@@ -25,4 +29,15 @@ public class StudentController {
         );
         return students;
     }
+     @GetMapping("/count")
+    public int countStudents() {
+
+        String sql = "SELECT COUNT(*) FROM students";
+
+        return jdbcTemplate.queryForObject(
+                sql,
+                Integer.class
+        );
+    }
+
 }
