@@ -1,10 +1,12 @@
 package com.example.studentManagementSystem.service;
 
-import org.springframework.stereotype.Service;
 import java.util.Date;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
-import org.springframework.beans.factory.annotation.Value;
 
 
 @Service
@@ -24,5 +26,30 @@ public class JwtService {
                 .signWith(Keys.hmacShaKeyFor(key.getBytes()))
                 .compact();
             return token;
+    }
+
+    public boolean isValid(String token) {
+        // In a real application, you would use a library like jjwt to validate the JWT token
+        // Here, we are just returning true for demonstration purposes
+        try {
+            Jwts.parser()
+                .setSigningKey(Keys.hmacShaKeyFor(key.getBytes()))
+                .build()
+                .parseSignedClaims(token);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public String getUsernameFromToken(String token) {
+        // In a real application, you would use a library like jjwt to extract the username from the JWT token
+        // Here, we are just returning a dummy username for demonstration purposes
+        return Jwts.parser()
+                .setSigningKey(Keys.hmacShaKeyFor(key.getBytes()))
+                .build()
+                .parseSignedClaims(token)
+                .getBody()
+                .getSubject();
     }
 }
