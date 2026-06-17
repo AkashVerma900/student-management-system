@@ -1,4 +1,6 @@
 import {useState} from 'react';
+import './App.css';
+
 function App(){
     // {"id":1,"name":"Akash","course":"Computer Science"}
     const [students, setStudents] = useState([])
@@ -25,6 +27,12 @@ function App(){
         });
         alert('Login successful');
     }
+    const loginWithGoogle = () => {
+
+        window.location.href =
+          "http://localhost:8080/oauth2/authorization/google";
+
+    };
     return(
         //<div>
            
@@ -47,11 +55,14 @@ function App(){
 
         <input placeholder="Username" onChange={(e)=>setUsername(e.target.value)} />
 
-        <input placeholder="Password" onChange={(e)=> setPassword(e.target.value)}/>
+        <input placeholder="Password" type="password" onChange={(e)=> setPassword(e.target.value)}/>
 
-        <button onClick={login}> Login </button>
+      <button onClick={loginWithGoogle}>
+        Login with Google
+      </button>
 
     </div>
+    
         
     );
 }
